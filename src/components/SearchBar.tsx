@@ -20,15 +20,22 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const color = textInput();
 
   return (
-    <Box color={color} borderRadius="4px" mb="2rem" bg={bg}>
-      <InputGroup h="100%" p="0.5rem" pl="1.5rem" borderRadius="inherit">
+    <Box
+      color={color}
+      borderRadius="4px"
+      mb="2rem"
+      bg={bg}
+      h="100%"
+      w={{ sm: "60%" }}
+    >
+      <InputGroup h="100%" p={"0.5rem"} pl="1.5rem" borderRadius="inherit">
         <InputLeftElement
           pointerEvents="none"
           children={<SearchIcon color="gray" />}
           position="relative"
         />
         <Input
-          type="tel"
+          type="text"
           placeholder="Search for country..."
           pl="1.5rem"
           variant="unstyled"

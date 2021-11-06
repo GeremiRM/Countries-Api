@@ -11,7 +11,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
   const bg = bgElement();
 
   return (
-    <Box bg={bg} p="1.5rem 0" mb="1.5rem">
+    <Box bg={bg} p="1.5rem 0" mb="2.25rem">
       <Wrapper>
         <HStack justify="space-between">
           <Text fontWeight="800" fontSize="16px">
