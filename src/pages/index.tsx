@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CountriesContext } from "../context/CountriesContext";
 
 import { Box } from "@chakra-ui/react";
 import { Header } from "../components/Header/Header";
@@ -13,26 +14,15 @@ import "@fontsource/nunito-sans/800.css";
 import { bgBody, textColor } from "../components/styles/colorModes";
 
 const Index: React.FC<{}> = ({}) => {
-  const [countries, setCountries] = useState([]);
-  const [filteredCountries, setFilteredCountries] = useState([]);
+  const { countries, filteredCountries, setFilteredCountries } =
+    useContext(CountriesContext);
   const [filter, setFilter] = useState("blah");
   const [searchInput, setSearchInput] = useState("");
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      const data = await fetch("https://restcountries.com/v3.1/all");
-      const response = await data.json();
-      setCountries(response);
-      setFilteredCountries(response);
-    };
-    fetchCountries();
-  }, []);
 
   const bg = bgBody();
   const color = textColor();
 
   useEffect(() => {
-    console.log("hola!!");
     const filterCountries = () => {
       switch (filter) {
         case "Africa":

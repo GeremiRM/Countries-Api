@@ -1,5 +1,5 @@
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
-
+import { CountriesProvider } from "../context/CountriesContext";
 import theme from "../theme";
 
 function MyApp({ Component, pageProps }) {
@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }) {
           useSystemColorMode: true,
         }}
       >
-        <Component {...pageProps} />
+        <CountriesProvider>
+          <Component {...pageProps} />
+        </CountriesProvider>
       </ColorModeProvider>
     </ChakraProvider>
   );

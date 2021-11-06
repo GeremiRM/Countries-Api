@@ -1,6 +1,18 @@
-import { createContext, useState } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-export const CountriesContext = createContext("");
+interface IContext {
+  countries: any[];
+  filteredCountries: any[];
+  setFilteredCountries: any;
+}
+
+export const CountriesContext = createContext<IContext>({} as IContext);
 
 const fetchData = async () => {
   const data = await fetch("https://restcountries.com/v3.1/all");
@@ -8,12 +20,29 @@ const fetchData = async () => {
   return response;
 };
 
-export const CountriesProvider = async () => {
+export const CountriesProvider = (props) => {
   const [countries, setCountries] = useState([]);
-  const [filteredCountries, setFiltCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
 
-  const fetchData = async () => {
-    const data = await fetch("https://restcountries.com/v3.1/all");
-    const response = await data.json();
-  };
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const data = await fetch("https://restcountries.com/v3.1/all");
+      const response = await data.json();
+      setCountries(response);
+      setFilteredCountries(response);
+    };
+    fetchCountries();
+  }, []);
+
+  return (
+    <CountriesContext.Provider
+      value={{
+        countries: countries,
+        filteredCountries: filteredCountries,
+        setFilteredCountries,
+      }}
+    >
+      {props.children}
+    </CountriesContext.Provider>
+  );
 };
