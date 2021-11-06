@@ -1,4 +1,4 @@
-import { Grid, Box } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import { CountryCard } from "./CountryCard";
 
 interface CountriesProps {
@@ -6,11 +6,19 @@ interface CountriesProps {
 }
 
 export const Countries: React.FC<CountriesProps> = ({ countries }) => {
+  console.log(countries);
   const renderCountries = () => {
-    return countries.map((country) => (
-      <CountryCard key={country.name.common} country={country} />
-    ));
+    return countries.map((country) => <CountryCard country={country} />);
   };
 
-  return <Grid>{renderCountries()}</Grid>;
+  return (
+    <Grid
+      templateColumns="repeat(auto-fit, 250px)"
+      gap="2rem"
+      mx="auto"
+      justifyContent="center"
+    >
+      {renderCountries()}
+    </Grid>
+  );
 };

@@ -1,6 +1,5 @@
-import { Select } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import React, { Dispatch, FormEvent, SetStateAction } from "react";
+import { Select, useColorModeValue } from "@chakra-ui/react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface FilterProps {
   setFilter: Dispatch<SetStateAction<string>>;
@@ -9,9 +8,11 @@ interface FilterProps {
 const Regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
 export const Filter: React.FC<FilterProps> = ({ setFilter }) => {
+  const elementBg = useColorModeValue("hsl(0, 0%, 100%)", "hsl(209, 23%, 22%)");
+
   const renderOptions = () => {
     return Regions.map((region) => (
-      <option key={region} value={region} onChange={handleChange}>
+      <option key={region} value={region}>
         {region}
       </option>
     ));
@@ -21,5 +22,17 @@ export const Filter: React.FC<FilterProps> = ({ setFilter }) => {
     setFilter(e.target.value);
   };
 
-  return <Select placeholder="Select option">{renderOptions()}</Select>;
+  return (
+    <Select
+      onChange={handleChange}
+      placeholder="Filter by Region"
+      fontSize="inherit"
+      bg={elementBg}
+      w="60%"
+      h="3.5rem"
+      mb="2.5rem"
+    >
+      {renderOptions()}
+    </Select>
+  );
 };
