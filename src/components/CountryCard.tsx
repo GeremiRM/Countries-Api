@@ -1,5 +1,7 @@
-import { Box, Heading, Image, VStack, HStack, Text } from "@chakra-ui/react";
-import React from "react";
+import Link from "next/link";
+import { Box, VStack, Text } from "@chakra-ui/react";
+
+import { bgElement } from "./styles/colorModes";
 
 interface CountryCardProps {
   country: {
@@ -18,26 +20,50 @@ interface CountryCardProps {
 // REMEMBER THERE'S A PROBLEM WITH ANDORRA'S FLAG
 
 export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
+  const bg = bgElement();
+
   return (
-    <Box>
-      <Image src={country.flags.svg} alt={country.name.common} />
-      <VStack>
-        <Heading>{country.name.common}</Heading>
-        <HStack>
-          <Text>
-            <Box as="span">Population:</Box>
-            {country.population}
+    <Link href={`/${country.name.common}`}>
+      <Box borderRadius="5px" minH="320px" bg={bg}>
+        <Box
+          bg={`url(${country.flags.svg}) no-repeat center/cover`}
+          h="160px"
+          borderTopLeftRadius="inherit"
+          borderTopRightRadius="inherit"
+          w="100%"
+        ></Box>
+        <VStack
+          align="normal"
+          spacing="0.75rem"
+          p="1rem 2rem"
+          borderBottomLeftRadius="inherit"
+          borderBottomRightRadius="inherit"
+        >
+          <Text fontSize="18px" fontWeight="800">
+            {country.name.common}
           </Text>
-          <Text>
-            <Box as="span">Region:</Box>
-            {country.region}
-          </Text>
-          <Text>
-            <Box as="span">Capital:</Box>
-            {country.capital}
-          </Text>
-        </HStack>
-      </VStack>
-    </Box>
+          <VStack align="normal" spacing="4px">
+            <Text>
+              <Box as="span" fontWeight="600">
+                Population:{" "}
+              </Box>
+              {Number(country.population).toLocaleString()}
+            </Text>
+            <Text>
+              <Box as="span" fontWeight="600">
+                Region:{" "}
+              </Box>
+              {country.region}
+            </Text>
+            <Text>
+              <Box as="span" fontWeight="600">
+                Capital:{" "}
+              </Box>
+              {country.capital}
+            </Text>
+          </VStack>
+        </VStack>
+      </Box>
+    </Link>
   );
 };
