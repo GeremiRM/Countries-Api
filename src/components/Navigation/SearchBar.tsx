@@ -1,7 +1,7 @@
+import { Dispatch, SetStateAction } from "react";
 import { Box, InputGroup, Input, InputLeftElement } from "@chakra-ui/react";
-import React, { Dispatch, SetStateAction } from "react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { bgElement, textInput } from "./styles/colorModes";
+import { bgElement, textInput } from "../../theme";
 
 interface SearchBarProps {
   searchInput: string;

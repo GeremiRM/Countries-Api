@@ -5,10 +5,12 @@ interface FilterProps {
   setFilter: Dispatch<SetStateAction<string>>;
 }
 
+import { bgElement } from "../../theme";
+
 const Regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
 export const Filter: React.FC<FilterProps> = ({ setFilter }) => {
-  const elementBg = useColorModeValue("hsl(0, 0%, 100%)", "hsl(209, 23%, 22%)");
+  const bg = bgElement();
 
   const renderOptions = () => {
     return Regions.map((region) => (
@@ -27,7 +29,7 @@ export const Filter: React.FC<FilterProps> = ({ setFilter }) => {
       onChange={handleChange}
       placeholder="Filter by Region"
       fontSize={{ base: "inherit", md: "18px" }}
-      bg={elementBg}
+      bg={bg}
       w={{ base: "60%", sm: "25%", lg: "15%" }}
       h="3.5rem"
       mb="2.5rem"

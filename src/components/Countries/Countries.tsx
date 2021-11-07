@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from "@chakra-ui/react";
+import { Box, Grid } from "@chakra-ui/react";
 import { CountryCard } from "./CountryCard";
 
 interface CountriesProps {

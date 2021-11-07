@@ -4,16 +4,16 @@ import { CountriesContext } from "../context/CountriesContext";
 import { MAX_ELEMENTS } from "../context/CountriesContext";
 import { Box, Button } from "@chakra-ui/react";
 import { Header } from "../components/Header/Header";
-import { Filter } from "../components/Filter";
-import { SearchBar } from "../components/SearchBar";
-import { Countries } from "../components/Countries";
+import { Filter } from "../components/Navigation/Filter";
+import { SearchBar } from "../components/Navigation/SearchBar";
+import { Countries } from "../components/Countries/Countries";
 import { Wrapper } from "../components/Wrapper";
 
 import "@fontsource/nunito-sans/300.css";
 import "@fontsource/nunito-sans/600.css";
 import "@fontsource/nunito-sans/800.css";
 
-import { bgBody, bgElement, textColor } from "../components/styles/colorModes";
+import { bgBody, bgElement, textColor } from "../theme";
 
 const Index: React.FC<{}> = ({}) => {
   const { countries, filteredCountries, setFilteredCountries } =
@@ -78,7 +78,7 @@ const Index: React.FC<{}> = ({}) => {
           />
           <Filter setFilter={setFilter} />
         </Box>
-        <Countries
+        <Countries // Amount of items to be shown on screen
           countries={filteredCountries.slice(
             0,
             page * MAX_ELEMENTS + MAX_ELEMENTS
@@ -88,6 +88,7 @@ const Index: React.FC<{}> = ({}) => {
           onClick={loadMore}
           mx="auto"
           display={
+            // Are there any more items to be loaded?
             page * MAX_ELEMENTS + MAX_ELEMENTS < filteredCountries.length
               ? "block"
               : "none"

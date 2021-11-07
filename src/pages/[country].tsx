@@ -6,7 +6,7 @@ import { CountriesContext } from "../context/CountriesContext";
 import { Box, Button, Grid, Image, Stack, Text, Flex } from "@chakra-ui/react";
 import { Header } from "../components/Header/Header";
 import { Wrapper } from "../components/Wrapper";
-import { bgBody, bgElement, textColor } from "../components/styles/colorModes";
+import { bgBody, bgElement, textColor } from "../theme";
 
 import { FaArrowLeft } from "react-icons/fa";
 import "@fontsource/nunito-sans/300.css";
@@ -14,14 +14,15 @@ import "@fontsource/nunito-sans/600.css";
 import "@fontsource/nunito-sans/800.css";
 
 const country: React.FC<{}> = ({}) => {
-  const { countries } = useContext(CountriesContext);
   const router = useRouter();
   const { country } = router.query;
+  const { countries } = useContext(CountriesContext);
+
   const bg = bgBody();
   const color = textColor();
   const bgButton = bgElement();
 
-  const countryInfo = countries.find((c) => country === c.name.common);
+  const countryInfo = countries.find((c) => c.name.common === country);
 
   const renderNativeNames = (nativeNames) => {
     let text = [];
@@ -100,7 +101,7 @@ const country: React.FC<{}> = ({}) => {
                 w={{ base: "100%", lg: "90%" }}
                 maxW={{ md: "600px", xl: "95%" }}
                 maxH="50vh"
-                height={{ base: "100%", xl: "auto" }}
+                height={{ base: "100%", lg: "auto" }}
               />
             </Box>
             <Box w={{ lg: "50%" }} alignSelf={{ lg: "center" }}>
