@@ -28,9 +28,10 @@ export const Filter: React.FC<FilterProps> = ({ setFilter }) => {
       placeholder="Filter by Region"
       fontSize="inherit"
       bg={elementBg}
-      w={{ base: "60%", sm: "25%" }}
+      w={{ base: "60%", sm: "25%", lg: "15%" }}
       h="3.5rem"
       mb="2.5rem"
+      boxShadow="md"
     >
       {renderOptions()}
     </Select>

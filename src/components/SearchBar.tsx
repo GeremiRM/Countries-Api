@@ -26,7 +26,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       mb="2rem"
       bg={bg}
       h="100%"
-      w={{ sm: "60%" }}
+      w={{ sm: "60%", lg: "40%" }}
+      boxShadow="md"
     >
       <InputGroup h="100%" p={"0.5rem"} pl="1.5rem" borderRadius="inherit">
         <InputLeftElement

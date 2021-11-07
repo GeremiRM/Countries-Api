@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { CountriesContext } from "../context/CountriesContext";
 
+import { MAX_ELEMENTS } from "../context/CountriesContext";
 import { Box, Button } from "@chakra-ui/react";
 import { Header } from "../components/Header/Header";
 import { Filter } from "../components/Filter";
@@ -11,22 +12,21 @@ import { Wrapper } from "../components/Wrapper";
 import "@fontsource/nunito-sans/300.css";
 import "@fontsource/nunito-sans/600.css";
 import "@fontsource/nunito-sans/800.css";
-import { bgBody, textColor } from "../components/styles/colorModes";
 
-import { MAX_ELEMENTS } from "../context/CountriesContext";
+import { bgBody, textColor } from "../components/styles/colorModes";
 
 const Index: React.FC<{}> = ({}) => {
   const { countries, filteredCountries, setFilteredCountries } =
     useContext(CountriesContext);
 
   const [filter, setFilter] = useState("");
-
   const [searchInput, setSearchInput] = useState("");
+  const [page, setPage] = useState(0);
 
   const bg = bgBody();
   const color = textColor();
 
-  const filterCountries = (countriesList = countries) => {
+  const filterByRegion = (countriesList = countries) => {
     switch (filter) {
       case "Africa":
         return countriesList.filter((country) => country.region === "Africa");
@@ -43,16 +43,31 @@ const Index: React.FC<{}> = ({}) => {
     }
   };
 
+  const filterBySearch = (countriesList = countries) => {
+    return countriesList.filter((country) =>
+      country.name.common.toLowerCase().includes(searchInput.toLowerCase())
+    );
+  };
+
   useEffect(() => {
-    setFilteredCountries(filterCountries());
-  }, [filter]);
+    const filtCountries = filter === "" ? countries : filterByRegion();
+    setFilteredCountries(filterBySearch(filtCountries));
+    setPage(0);
+  }, [filter, searchInput]);
 
-  // useEffect(() => {
-
-  // },[searchInput])
+  const loadMore = () => {
+    setPage(page + 1);
+  };
 
   return (
-    <Box bg={bg} color={color} fontSize="14px" fontFamily="Nunito Sans">
+    <Box
+      bg={bg}
+      color={color}
+      fontSize="14px"
+      fontFamily="Nunito Sans"
+      pb="2rem"
+      minH="100vh"
+    >
       <Header />
       <Wrapper>
         <Box display={{ sm: "flex" }} justifyContent={{ sm: "space-between" }}>
@@ -62,8 +77,23 @@ const Index: React.FC<{}> = ({}) => {
           />
           <Filter setFilter={setFilter} />
         </Box>
-        <Countries countries={filteredCountries} />
-        <Button>Load More</Button>
+        <Countries
+          countries={filteredCountries.slice(
+            0,
+            page * MAX_ELEMENTS + MAX_ELEMENTS
+          )}
+        />
+        <Button
+          onClick={loadMore}
+          mx="auto"
+          display={
+            page * MAX_ELEMENTS + MAX_ELEMENTS < filteredCountries.length
+              ? "block"
+              : "none"
+          }
+        >
+          Load More
+        </Button>
       </Wrapper>
     </Box>
   );
