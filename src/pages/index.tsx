@@ -13,7 +13,7 @@ import "@fontsource/nunito-sans/300.css";
 import "@fontsource/nunito-sans/600.css";
 import "@fontsource/nunito-sans/800.css";
 
-import { bgBody, textColor } from "../components/styles/colorModes";
+import { bgBody, bgElement, textColor } from "../components/styles/colorModes";
 
 const Index: React.FC<{}> = ({}) => {
   const { countries, filteredCountries, setFilteredCountries } =
@@ -25,6 +25,7 @@ const Index: React.FC<{}> = ({}) => {
 
   const bg = bgBody();
   const color = textColor();
+  const bgElem = bgElement();
 
   const filterByRegion = (countriesList = countries) => {
     switch (filter) {
@@ -91,6 +92,7 @@ const Index: React.FC<{}> = ({}) => {
               ? "block"
               : "none"
           }
+          bg={bgElem}
         >
           Load More
         </Button>

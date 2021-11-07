@@ -10,4 +10,7 @@ export const textColor = () =>
   useColorModeValue("hsl(200, 15%, 8%)", "hsl(0, 0%, 100%)");
 
 export const textInput = () =>
-  useColorModeValue("hsl(0, 0%, 52%)", "hslhsl(209, 23%, 22%)");
+  useColorModeValue("hsl(0, 0%, 52%)", "hsl(0, 0%, 100%)");
+
+export const bgCardHover = () =>
+  useColorModeValue("hsl(0, 0%, 90%)", "hsl(209, 23%, 62%)");

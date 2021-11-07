@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Box, VStack, Text, SlideFade } from "@chakra-ui/react";
 
-import { bgElement } from "./styles/colorModes";
+import { bgCardHover, bgElement } from "./styles/colorModes";
 
 interface CountryCardProps {
   country: {
@@ -21,6 +21,7 @@ interface CountryCardProps {
 
 export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   const bg = bgElement();
+  const hoverStyle = bgCardHover();
 
   return (
     <Link href={`/${country.name.common}`}>
@@ -31,6 +32,8 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           bg={bg}
           boxShadow="md"
           cursor="pointer"
+          _hover={{ transform: "translateY(-20px)" }}
+          transition="0.25s"
         >
           <Box
             bg={`url(${country.flags.svg}) no-repeat center/cover`}

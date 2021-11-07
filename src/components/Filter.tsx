@@ -26,12 +26,13 @@ export const Filter: React.FC<FilterProps> = ({ setFilter }) => {
     <Select
       onChange={handleChange}
       placeholder="Filter by Region"
-      fontSize="inherit"
+      fontSize={{ base: "inherit", md: "18px" }}
       bg={elementBg}
       w={{ base: "60%", sm: "25%", lg: "15%" }}
       h="3.5rem"
       mb="2.5rem"
       boxShadow="md"
+      borderColor="transparent"
     >
       {renderOptions()}
     </Select>

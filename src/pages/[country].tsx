@@ -58,7 +58,7 @@ const country: React.FC<{}> = ({}) => {
             borderRadius="2px"
             fontSize="14px"
             boxShadow="md"
-            cursor="pointers"
+            cursor="pointer"
           >
             {common}
           </Text>

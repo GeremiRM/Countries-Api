@@ -11,10 +11,10 @@ export const Header: React.FC<HeaderProps> = ({}) => {
   const bg = bgElement();
 
   return (
-    <Box bg={bg} p="1.5rem 0" mb="2.25rem">
+    <Box bg={bg} py={{ base: "1.5rem", lg: "2.5rem" }} mb="2.25rem">
       <Wrapper>
         <HStack justify="space-between">
-          <Text fontWeight="800" fontSize="16px">
+          <Text fontWeight="800" fontSize={{ base: "16px", md: "24px" }}>
             Where in the world?
           </Text>
           <Button
@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
             onClick={toggleColorMode}
             bg="inherit"
             border="none"
-            fontSize="14px"
+            fontSize={{ base: "14px", md: "18px" }}
           >
             {colorMode === "light" ? "Dark" : "Light"} Mode
           </Button>
