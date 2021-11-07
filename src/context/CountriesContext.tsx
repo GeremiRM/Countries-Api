@@ -23,9 +23,7 @@ export const CountriesProvider = (props) => {
         a.name.common < b.name.common ? -1 : 1
       );
       setCountries(sortedArray);
-      setFilteredCountries(
-        sortedArray.slice(0 * MAX_ELEMENTS, 0 + MAX_ELEMENTS)
-      );
+      setFilteredCountries(sortedArray);
     };
     fetchCountries();
   }, []);
